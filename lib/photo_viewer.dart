@@ -105,6 +105,7 @@ class VerticalSwipeDismissible extends StatefulWidget {
   final bool enabled;
   final double dismissThreshold;
   final VoidCallback? onDismissed;
+  Color? backgroundColor;
 
   @override
   VerticalSwipeDismissibleState createState() =>
@@ -246,7 +247,7 @@ class VerticalSwipeDismissibleState extends State<VerticalSwipeDismissible>
             }
           : null,
       child: ColoredBox(
-        color: Colors.black,
+        color: widget.backgroundColor ?? Colors.black,
         child: SlideTransition(
           position: moveAnimation,
           child: widget.child,
@@ -430,8 +431,11 @@ class PhotoViewerScreen extends StatefulWidget {
     this.fit = BoxFit.cover,
     this.placeholder,
     this.errorWidget,
+    this.backgroundColor,
     super.key,
   });
+
+  final Color? backgroundColor;
 
   /// Single-photo builder (if multiple are not provided).
   final WidgetBuilder? builder;
@@ -543,6 +547,7 @@ class PhotoViewerScreenState extends State<PhotoViewerScreen>
       body: Stack(
         children: [
           VerticalSwipeDismissible(
+            backgroundColor: widget.backgroundColor,
             onDismissed: onDismiss,
             enabled:
                 widget.enableVerticalDismiss && !isZoomed.value && !isScrolling,
@@ -801,6 +806,7 @@ Future<void> showPhotoViewer({
   int initialPage = 0,
   bool showDefaultCloseButton = true,
   bool enableVerticalDismiss = true,
+  Color? backgroundColor,
   ValueChanged<int>? onPageChanged,
   void Function(void Function(int page) jump)? onJumpToPage,
   BoxFit fit = BoxFit.cover,
@@ -816,6 +822,7 @@ Future<void> showPhotoViewer({
           overlayBuilder: overlayBuilder,
           minScale: minScale ?? 1.0,
           maxScale: maxScale ?? 2.0,
+          backgroundColor: backgroundColor,
           heroTagBuilder: heroTagBuilder,
           initialPage: initialPage,
           showDefaultCloseButton: showDefaultCloseButton,
