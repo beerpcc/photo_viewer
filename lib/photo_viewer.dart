@@ -106,7 +106,7 @@ class VerticalSwipeDismissible extends StatefulWidget {
   final bool enabled;
   final double dismissThreshold;
   final VoidCallback? onDismissed;
-  Color? backgroundColor;
+  final Color? backgroundColor;
 
   @override
   VerticalSwipeDismissibleState createState() =>
