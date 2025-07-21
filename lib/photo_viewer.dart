@@ -99,7 +99,7 @@ class VerticalSwipeDismissible extends StatefulWidget {
     this.enabled = true,
     this.dismissThreshold = 0.2,
     this.onDismissed,
-    this.backgroundColor
+    this.backgroundColor,
   });
 
   final Widget child;
